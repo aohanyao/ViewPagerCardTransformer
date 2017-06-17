@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/g_view_type">
+
+
+    </group>
+    <item
+        android:id="@+id/action_top"
+        android:orderInCategory="100"
+        android:title="Top"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_top_left"
+        android:orderInCategory="100"
+        android:title="Top Left"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_top_right"
+        android:orderInCategory="100"
+        android:title="Top Right"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_bottom"
+        android:orderInCategory="100"
+        android:title="Bottom"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_bottom_left"
+        android:orderInCategory="100"
+        android:title="Bottom Left"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_bottom_right"
+        android:orderInCategory="100"
+        android:title="Bottom Right"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_right"
+        android:orderInCategory="100"
+        android:title="Right"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_Left"
+        android:orderInCategory="100"
+        android:title="Left"
+        app:showAsAction="never" />
+</menu>
