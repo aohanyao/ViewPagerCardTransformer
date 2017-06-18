@@ -29,7 +29,7 @@
                 .addAnimationType(PageTransformerConfig.ROTATION)//默认动画 default animation rotation  旋转  当然 也可以一次性添加两个  后续会增加更多动画
                 .setRotation(-45)//旋转角度
                 .addAnimationType(PageTransformerConfig.ALPHA)//默认动画 透明度 暂时还有问题
-                .setViewType(mViewType)
+                .setViewType(mViewType)//view的类型
                 .setOnPageTransformerListener(new OnPageTransformerListener() {
                     @Override
                     public void onPageTransformerListener(View page, float position) {
@@ -42,6 +42,40 @@
 
 
 
+mViewType
+
+    /**
+     * 底部
+     */
+    public static final int BOTTOM = 1;
+    /**
+     * 底部 左边
+     */
+    public static final int BOTTOM_LEFT = 11;
+    /**
+     * 底部右边
+     */
+    public static final int BOTTOM_RIGHT = 12;
+    /**
+     * 上面
+     */
+    public static final int TOP = 2;
+    /**
+     * 上左
+     */
+    public static final int TOP_LEFT = 21;
+    /**
+     * 上右
+     */
+    public static final int TOP_RIGHT = 22;
+    /**
+     * 左边
+     */
+    public static final int LEFT = 3;
+    /**
+     * 右边
+     */
+    public static final int RIGHT = 4;
 
 
 
