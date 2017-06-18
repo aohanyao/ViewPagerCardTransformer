@@ -81,9 +81,13 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
                 mBuild.onPageTransformerListener.onPageTransformerListener(page, position);
             }
 
+            //打开点击事件
+            page.setClickable(true);
 
         } else {
             setHorizontalTransformPager(page, position);
+            //屏蔽点击事件
+            page.setClickable(false);
         }
     }
 
