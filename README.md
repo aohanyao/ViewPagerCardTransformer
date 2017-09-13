@@ -11,20 +11,23 @@
 
 #### setp 1
 
+```java
 	repositories {
 		...
 		maven { url 'https://jitpack.io' }
 	}
-	
+```	
 	
 ### step 2
 
+```java
 	dependencies {
 	        compile 'com.github.aohanyao:ViewPagerCardTransformer:v1.0'
 	}
-
+```	
 ### step 3
 
+```java
 	 vpMain.setPageTransformer(true, CardPageTransformer.getBuild()//建造者模式
                 .addAnimationType(PageTransformerConfig.ROTATION)//默认动画 default animation rotation  旋转  当然 也可以一次性添加两个  后续会增加更多动画
                 .setRotation(-45)//旋转角度
@@ -40,10 +43,12 @@
                 .setScaleOffset(80)
                 .create());
 
+```	
 
 
 mViewType
 
+```java
     /**
      * 底部
      */
@@ -77,13 +82,10 @@ mViewType
      */
     public static final int RIGHT = 4;
 
-
+```	
 
 ### about
 如果我的代码对你有帮组，请给我一个star
 
 我的[简书](http://www.jianshu.com/u/3e53005808b1)
-
-来来扫下码，关注一下吧,或者微信搜索AndroidRookie
-
-![AndroidRookie](http://upload-images.jianshu.io/upload_images/1760510-809d019561f671ed.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+://upload-images.jianshu.io/upload_images/1760510-809d019561f671ed.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
