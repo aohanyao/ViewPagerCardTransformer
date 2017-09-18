@@ -3,10 +3,7 @@ package com.aohanyao.transformer;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -88,20 +85,20 @@ public class VerticalActivity extends AppCompatActivity {
 
 
     private void initPager(@PageTransformerConfig.ViewType int mViewType) {
-//        vpMain.setPageTransformer(true, CardPageTransformer.getBuild()//建造者模式
-//               // .addAnimationType(PageTransformerConfig.ROTATION)//默认动画  旋转  当然 也可以一次性添加两个  后续会增加更多动画
-//                .setRotation(-45)//旋转角度
-//               // .addAnimationType(PageTransformerConfig.ALPHA)//默认动画 透明度 暂时还有问题
-//                .setViewType(mViewType)
-//                .setOnPageTransformerListener(new OnPageTransformerListener() {
-//                    @Override
-//                    public void onPageTransformerListener(View page, float position) {
-//                        //你也可以在这里对 page 实行自定义动画
-//                    }
-//                })
-//                .setTranslationOffset(40)
-//                .setScaleOffset(80)
-//                .create());
+        vpMain.setPageTransformer(true, CardPageTransformer.getBuild()//建造者模式
+               // .addAnimationType(PageTransformerConfig.ROTATION)//默认动画  旋转  当然 也可以一次性添加两个  后续会增加更多动画
+                .setRotation(-45)//旋转角度
+               // .addAnimationType(PageTransformerConfig.ALPHA)//默认动画 透明度 暂时还有问题
+                .setViewType(mViewType)
+                .setOnPageTransformerListener(new OnPageTransformerListener() {
+                    @Override
+                    public void onPageTransformerListener(View page, float position) {
+                        //你也可以在这里对 page 实行自定义动画
+                    }
+                })
+                .setTranslationOffset(40)
+                .setScaleOffset(80)
+                .create());
 
 
         //创建适配器

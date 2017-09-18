@@ -35,8 +35,8 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
             //水平方向  Horizontal
             transformHorizontal(page, position);
         } else {
-            throw new RuntimeException("now only support horizontal");
-            //transformHorizontal(page, position);
+//            throw new RuntimeException("now only support horizontal");
+            transformHorizontal(page, position);
         }
 
 
