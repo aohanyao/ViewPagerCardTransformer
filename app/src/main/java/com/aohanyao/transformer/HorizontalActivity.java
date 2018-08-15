@@ -104,6 +104,7 @@ public class HorizontalActivity extends AppCompatActivity {
         //创建适配器
         mAdapter = new BaseFragmentPagerAdapter(getSupportFragmentManager(), mFragments, null);
         vpMain.setAdapter(mAdapter);
+        vpMain.setOffscreenPageLimit(3);
 
 
     }
@@ -117,7 +118,7 @@ public class HorizontalActivity extends AppCompatActivity {
     private List<Fragment> getFragments() {
         vpMain = (ViewPager) findViewById(R.id.vp_main);
         List<Fragment> mFragments = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 15; i++) {
             mFragments.add(GuideFragment.newInstance(i));
         }
         return mFragments;
