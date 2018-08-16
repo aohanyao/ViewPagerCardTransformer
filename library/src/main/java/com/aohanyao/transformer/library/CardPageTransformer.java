@@ -84,10 +84,14 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
             //打开点击事件
             page.setClickable(true);
 
-        } else {
+        } else if (position <= mBuild.mMaxShowPage || mBuild.mViewPager == null) {    //只显示3张卡片
+
             setHorizontalTransformPager(page, position);
             //屏蔽点击事件
             page.setClickable(false);
+        } else {
+            page.setTranslationX(0f);
+            page.setTranslationY(0f);
         }
     }
 
@@ -190,6 +194,16 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
          * 方向
          */
         private int mOrientation = PageTransformerConfig.HORIZONTAL;
+        /**
+         * 默认显示的页数
+         */
+        private int mMaxShowPage = 5;
+        /**
+         * ViewPager
+         */
+        private ViewPager mViewPager;
+
+
         private OnPageTransformerListener onPageTransformerListener;
 
         public int getOrientation() {
@@ -199,6 +213,15 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
         public Build setOrientation(@PageTransformerConfig.Orientation int mOrientation) {
             this.mOrientation = mOrientation;
             return this;
+        }
+
+        public int getMaxShowPage() {
+            return mMaxShowPage;
+        }
+
+
+        public ViewPager getViewPager() {
+            return mViewPager;
         }
 
         public int getScaleOffset() {
@@ -226,6 +249,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
 
         /**
          * 设置View的类型 或者说 样式
+         *
          * @param mViewType
          * @return
          */
@@ -240,6 +264,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
 
         /**
          * 增加 动画类型
+         *
          * @param mAnimationType
          * @return
          */
@@ -253,9 +278,21 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
 
         /**
          * 完成创建
+         *
          * @return
          */
         public ViewPager.PageTransformer create() {
+            return new CardPageTransformer(this);
+        }
+
+        /**
+         * 完成创建
+         *
+         * @return
+         */
+        public ViewPager.PageTransformer create(ViewPager viewPager) {
+            this.mViewPager = viewPager;
+            this.mMaxShowPage = viewPager.getOffscreenPageLimit() - 1;
             return new CardPageTransformer(this);
         }
 

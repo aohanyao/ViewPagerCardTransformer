@@ -85,6 +85,9 @@ public class HorizontalActivity extends AppCompatActivity {
 
 
     private void initPager(@PageTransformerConfig.ViewType int mViewType) {
+        vpMain.setOffscreenPageLimit(3);
+
+
         vpMain.setPageTransformer(true, CardPageTransformer.getBuild()//建造者模式
                 .addAnimationType(PageTransformerConfig.ROTATION)//默认动画 default animation rotation  旋转  当然 也可以一次性添加两个  后续会增加更多动画
                 .setRotation(-45)//旋转角度
@@ -98,13 +101,12 @@ public class HorizontalActivity extends AppCompatActivity {
                 })
                 .setTranslationOffset(40)
                 .setScaleOffset(80)
-                .create());
+                .create(vpMain));
 
 
         //创建适配器
         mAdapter = new BaseFragmentPagerAdapter(getSupportFragmentManager(), mFragments, null);
         vpMain.setAdapter(mAdapter);
-        vpMain.setOffscreenPageLimit(3);
 
 
     }

@@ -85,7 +85,4 @@ mViewType
 ```	
 
 ### about
-如果我的代码对你有帮组，请给我一个star
-
-我的[简书](http://www.jianshu.com/u/3e53005808b1)
-://upload-images.jianshu.io/upload_images/1760510-809d019561f671ed.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+如果我的代码对你有帮助，请给我一个star
