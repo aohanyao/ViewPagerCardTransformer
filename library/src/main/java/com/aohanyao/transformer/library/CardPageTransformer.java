@@ -3,6 +3,7 @@ package com.aohanyao.transformer.library;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.aohanyao.transformer.library.conf.OnPageTransformerListener;
@@ -18,6 +19,7 @@ import java.util.TreeSet;
  */
 public class CardPageTransformer implements ViewPager.PageTransformer {
     private Build mBuild;
+    private String TAG = getClass().getSimpleName();
 
 
     private CardPageTransformer(Build build) {
@@ -52,6 +54,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
     private void transformHorizontal(View page, float position) {
         if (position <= 0.0f) {//被滑动的那页  The page that was sliding
             page.setTranslationX(0f);
+            Log.e(TAG, "transformHorizontal: " + position);
 
             //-----------------------动画 animation start
 
@@ -60,19 +63,29 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
                 //旋转 //Rotation
                 if (mBuild.mAnimationType.contains(PageTransformerConfig.ROTATION)) {
                     //旋转角度  Rotation angle   -45° * 0.1 = -4.5°
-                    page.setRotation((mBuild.mRotation * Math.abs(position)));
+                    float targetRotation = mBuild.mRotation * Math.abs(position);
+                    // 判断当前的阀值是否到达了指定位置
+                    if (Math.abs(targetRotation) > Math.abs(mBuild.mRotation) * mBuild.mOverloadRate) {
+                        targetRotation = mBuild.mRotation;
+                    }
+                    page.setRotation(targetRotation);
                     //X轴偏移 xAxis offset li:  300/3 * -0.1 = -10
-                    page.setTranslationX((page.getWidth() / 3 * position));
+                    page.setTranslationX((page.getWidth() / 3f * position));
                 }
 
                 //透明度 alpha
                 if (mBuild.mAnimationType.contains(PageTransformerConfig.ALPHA)) {
 
                     //设置透明度  set alpha
-                    page.setAlpha(mBuild.mAlpha - (mBuild.mAlpha * Math.abs(position)));
+                    float targetAlpha = mBuild.mAlpha - mBuild.mAlpha * Math.abs(position);
+                    // 增加计算一个容错率，
+                    if (targetAlpha > -mBuild.mOverloadRate) mBuild.mAlpha = 1.0f;
+                    page.setAlpha(targetAlpha);
                 }
             }
             //-----------------------动画 animation end
+
+            int childCount = mBuild.mViewPager.getChildCount();
 
 
             //回调自定义动画 callback customize animation
@@ -177,7 +190,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
         /**
          * 旋转角度
          */
-        private int mRotation = -45;
+        private float mRotation = -45;
         /**
          * 透明度
          */
@@ -198,6 +211,10 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
          * 默认显示的页数
          */
         private int mMaxShowPage = 5;
+        /**
+         * 容错率，为了解决快速滑动的情况下会有折叠的问题
+         */
+        private float mOverloadRate = 0.75f;
         /**
          * ViewPager
          */
@@ -246,6 +263,14 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
             return mViewType;
         }
 
+
+        public float getOverloadRate() {
+            return mOverloadRate;
+        }
+
+        public void setOverloadRate(float overloadRate) {
+            this.mOverloadRate = overloadRate;
+        }
 
         /**
          * 设置View的类型 或者说 样式
@@ -296,7 +321,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
             return new CardPageTransformer(this);
         }
 
-        public int getRotation() {
+        public float getRotation() {
             return mRotation;
         }
 
@@ -309,7 +334,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
             return this;
         }
 
-        public Build setRotation(int mRotation) {
+        public Build setRotation(float mRotation) {
             this.mRotation = mRotation;
             return this;
         }

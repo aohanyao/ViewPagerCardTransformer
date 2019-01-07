@@ -85,7 +85,7 @@ public class HorizontalActivity extends AppCompatActivity {
 
 
     private void initPager(@PageTransformerConfig.ViewType int mViewType) {
-        vpMain.setOffscreenPageLimit(3);
+//        vpMain.setOffscreenPageLimit(3);
 
 
         vpMain.setPageTransformer(true, CardPageTransformer.getBuild()//建造者模式
@@ -99,7 +99,7 @@ public class HorizontalActivity extends AppCompatActivity {
                         //你也可以在这里对 page 实行自定义动画 cust anim
                     }
                 })
-                .setTranslationOffset(40)
+                .setTranslationOffset(80)
                 .setScaleOffset(80)
                 .create(vpMain));
 
