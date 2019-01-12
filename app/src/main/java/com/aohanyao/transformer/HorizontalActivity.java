@@ -1,20 +1,16 @@
 package com.aohanyao.transformer;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.aohanyao.transformer.base.BaseFragmentPagerAdapter;
 import com.aohanyao.transformer.fragment.GuideFragment;
-import com.aohanyao.transformer.library.CardPageTransformer;
-import com.aohanyao.transformer.library.conf.OnPageTransformerListener;
 import com.aohanyao.transformer.library.conf.PageTransformerConfig;
 
 import java.util.ArrayList;
@@ -29,17 +25,17 @@ public class HorizontalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_horizontal);
+        setContentView(R.layout.content_horizontal);
         mActivity = this;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         //---------
         mFragments = getFragments();
-        vpMain.setOffscreenPageLimit(mFragments.size() * 2);
 
 
         initPager(PageTransformerConfig.BOTTOM);
+        vpMain.setOffscreenPageLimit(mFragments.size() * 2);
     }
 
 
@@ -88,25 +84,27 @@ public class HorizontalActivity extends AppCompatActivity {
 //        vpMain.setOffscreenPageLimit(3);
 
 
-        vpMain.setPageTransformer(true, CardPageTransformer.getBuild()//建造者模式
-                .addAnimationType(PageTransformerConfig.ROTATION)//默认动画 default animation rotation  旋转  当然 也可以一次性添加两个  后续会增加更多动画
-                .setRotation(-45)//旋转角度
-                .addAnimationType(PageTransformerConfig.ALPHA)//默认动画 透明度 暂时还有问题
-                .setViewType(mViewType)
-                .setOnPageTransformerListener(new OnPageTransformerListener() {
-                    @Override
-                    public void onPageTransformerListener(View page, float position) {
-                        //你也可以在这里对 page 实行自定义动画 cust anim
-                    }
-                })
-                .setTranslationOffset(80)
-                .setScaleOffset(80)
-                .create(vpMain));
+//        vpMain.setPageTransformer(true, CardPageTransformer.getBuild()//建造者模式
+//                .addAnimationType(PageTransformerConfig.ROTATION)//默认动画 default animation rotation  旋转  当然 也可以一次性添加两个  后续会增加更多动画
+//                .setRotation(-45)//旋转角度
+//                .addAnimationType(PageTransformerConfig.ALPHA)//默认动画 透明度 暂时还有问题
+//                .setViewType(mViewType)
+//                .setOnPageTransformerListener(new OnPageTransformerListener() {
+//                    @Override
+//                    public void onPageTransformerListener(View page, float position) {
+//                        //你也可以在这里对 page 实行自定义动画 cust anim
+//                    }
+//                })
+//                .setTranslationOffset(80)
+//                .setScaleOffset(80)
+//                .create(vpMain));
 
 
         //创建适配器
         mAdapter = new BaseFragmentPagerAdapter(getSupportFragmentManager(), mFragments, null);
+        vpMain.setClipChildren(false);
         vpMain.setAdapter(mAdapter);
+        vpMain.setPageMargin(80);
 
 
     }

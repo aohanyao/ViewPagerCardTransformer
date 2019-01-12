@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#01a6ff"
+    android:clipChildren="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.aohanyao.transformer.HorizontalActivity"
     tools:showIn="@layout/activity_horizontal">
@@ -12,6 +12,11 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:background="#01a6ff"
+        android:clipChildren="false"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="250dp" />
 
 </RelativeLayout>
