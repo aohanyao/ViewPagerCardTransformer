@@ -3,7 +3,6 @@ package com.aohanyao.transformer.library;
 import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 
 import com.aohanyao.transformer.library.conf.OnPageTransformerListener;
@@ -21,6 +20,15 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
     private Build mBuild;
     private String TAG = getClass().getSimpleName();
 
+    /**
+     * 当前的页
+     */
+    private View mNowPageView;
+    /**
+     * 当前下标的位置
+     */
+    private int mNowPagePosition;
+
 
     private CardPageTransformer(Build build) {
         mBuild = build;
@@ -32,6 +40,15 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
 
     @SuppressLint("NewApi")
     public void transformPage(View page, float position) {
+        if (mNowPageView != page) {
+            mNowPageView = page;
+            // 获取到当前下标
+            for (int i = 0; i < mBuild.getViewPager().getChildCount(); i++) {
+                if (mBuild.getViewPager().getChildAt(i) == mNowPageView) {
+                    mNowPagePosition = i;
+                }
+            }
+        }
         //判断方向  Judge the direction
         if (mBuild.mOrientation == PageTransformerConfig.HORIZONTAL) {
             //水平方向  Horizontal
@@ -54,8 +71,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
     private void transformHorizontal(View page, float position) {
         if (position <= 0.0f) {//被滑动的那页  The page that was sliding
             page.setTranslationX(0f);
-            Log.e(TAG, "transformHorizontal: " + position);
-
+//            Log.e(TAG, "transformHorizontal: " + position);
             //-----------------------动画 animation start
 
             // 动画类型不为none才执行动画  Animation type is not 'none'
@@ -71,6 +87,19 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
                     page.setRotation(targetRotation);
                     //X轴偏移 xAxis offset li:  300/3 * -0.1 = -10
                     page.setTranslationX((page.getWidth() / 3f * position));
+                    // 将左右两页都设置为正数
+                    if (mNowPagePosition >= 1) {// 右边的设置为正数
+                        // 这个view是fragment的RootLayout
+                        View leftPage = mBuild.getViewPager().getChildAt(mNowPagePosition - 1);
+                        leftPage.setRotation(0f);
+                        mBuild.getViewPager().postInvalidate();
+                    }
+                    // 下一页
+                    if (mNowPagePosition < mBuild.getViewPager().getChildCount() - 2) {
+                        View rightPage = mBuild.getViewPager().getChildAt(mNowPagePosition + 1);
+                        rightPage.setRotation(0f);
+                        mBuild.getViewPager().postInvalidate();
+                    }
                 }
 
                 //透明度 alpha

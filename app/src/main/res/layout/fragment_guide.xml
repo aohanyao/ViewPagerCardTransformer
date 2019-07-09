@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!-- 使用AndroidAutoLayout进行卡片适配 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:card_view="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -33,6 +33,12 @@
                 android:text="1"
                 android:textColor="#000"
                 android:textSize="80sp"/>
+            <TextView
+                android:id="@+id/tv_hash_code"
+                android:layout_width="wrap_content"
+                android:text="1212"
+                android:textColor="#000"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -40,4 +46,4 @@
     </android.support.v7.widget.CardView>
 
     <!-- 高 667 dp-->
-</LinearLayout>
+</RelativeLayout>
