@@ -35,23 +35,15 @@ public class GuideFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_guide, container, false);
 
         TextView tvText = (TextView) view.findViewById(R.id.tv_text);
-        TextView tv_hash_code = (TextView) view.findViewById(R.id.tv_hash_code);
-
 
         int pageIndex = getArguments().getInt("key", 0) + 1;
-        tv_hash_code.setText(String.valueOf(hashCode()));
         tvText.setText(String.valueOf(pageIndex));
-
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView tv_hash_code = (TextView) view.findViewById(R.id.tv_hash_code);
-
-        tv_hash_code.append("\n" + hashCode());
-
 
     }
 }

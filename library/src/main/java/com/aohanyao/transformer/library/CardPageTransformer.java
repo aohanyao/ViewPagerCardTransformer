@@ -18,7 +18,6 @@ import java.util.TreeSet;
  */
 public class CardPageTransformer implements ViewPager.PageTransformer {
     private Build mBuild;
-    private String TAG = getClass().getSimpleName();
 
     /**
      * 当前的页
@@ -87,7 +86,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
                     page.setRotation(targetRotation);
                     //X轴偏移 xAxis offset li:  300/3 * -0.1 = -10
                     page.setTranslationX((page.getWidth() / 3f * position));
-                    // 将左右两页都设置为正数
+                    // 将左右两页都扶正
                     if (mNowPagePosition >= 1) {// 右边的设置为正数
                         // 这个view是fragment的RootLayout
                         View leftPage = mBuild.getViewPager().getChildAt(mNowPagePosition - 1);
@@ -108,13 +107,26 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
                     //设置透明度  set alpha
                     float targetAlpha = mBuild.mAlpha - mBuild.mAlpha * Math.abs(position);
                     // 增加计算一个容错率，
-                    if (targetAlpha > -mBuild.mOverloadRate) mBuild.mAlpha = 1.0f;
-                    page.setAlpha(targetAlpha);
+                    if (targetAlpha > -mBuild.mOverloadRate) mBuild.mAlpha = 1.0f;{
+                        page.setAlpha(targetAlpha);
+                    }
+
+                    // 将左右两页都设置为不透明
+                    if (mNowPagePosition >= 1) {// 右边的设置为正数
+                        // 这个view是fragment的RootLayout
+                        View leftPage = mBuild.getViewPager().getChildAt(mNowPagePosition - 1);
+                        leftPage.setAlpha(1f);
+                        mBuild.getViewPager().postInvalidate();
+                    }
+                    // 下一页
+                    if (mNowPagePosition < mBuild.getViewPager().getChildCount() - 2) {
+                        View rightPage = mBuild.getViewPager().getChildAt(mNowPagePosition + 1);
+                        rightPage.setAlpha(1f);
+                        mBuild.getViewPager().postInvalidate();
+                    }
                 }
             }
             //-----------------------动画 animation end
-
-            int childCount = mBuild.mViewPager.getChildCount();
 
 
             //回调自定义动画 callback customize animation
