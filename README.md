@@ -5,9 +5,11 @@
 
 来先看看效果
 
-![](http://obh9jd33g.bkt.clouddn.com/%E5%B1%82%E5%8F%A0%E5%8D%A1%E7%89%878.gif)
+![](http://qiniu.fullscreendeveloper.cn/%E5%B1%82%E5%8F%A0%E5%8D%A1%E7%89%878.gif)
 
 
+#### 最新版本
+[![](https://jitpack.io/v/aohanyao/ViewPagerCardTransformer.svg)](https://jitpack.io/#aohanyao/ViewPagerCardTransformer)
 
 #### setp 1
 
@@ -22,7 +24,7 @@
 
 ```java
 	dependencies {
-	        compile 'com.github.aohanyao:ViewPagerCardTransformer:v1.0'
+	        compile 'com.github.aohanyao:ViewPagerCardTransformer:1.2'
 	}
 ```	
 ### step 3
