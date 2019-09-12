@@ -39,7 +39,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
 
     @SuppressLint("NewApi")
     public void transformPage(View page, float position) {
-        if (mNowPageView != page) {
+        if (mNowPageView != page && mBuild.getViewPager() != null) {
             mNowPageView = page;
             // 获取到当前下标
             for (int i = 0; i < mBuild.getViewPager().getChildCount(); i++) {
@@ -107,7 +107,8 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
                     //设置透明度  set alpha
                     float targetAlpha = mBuild.mAlpha - mBuild.mAlpha * Math.abs(position);
                     // 增加计算一个容错率，
-                    if (targetAlpha > -mBuild.mOverloadRate) mBuild.mAlpha = 1.0f;{
+                    if (targetAlpha > -mBuild.mOverloadRate) mBuild.mAlpha = 1.0f;
+                    {
                         page.setAlpha(targetAlpha);
                     }
 
